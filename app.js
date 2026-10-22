@@ -667,9 +667,8 @@
     timers.forEach(clearInterval);
     timers = [];
     const r = parse();
-    if (r.name === 'admin' && !isAdmin()) r.name = 'home';
+    if (!VIEWS[r.name] || (r.name === 'admin' && !isAdmin())) r.name = 'home';
     if (!state.seenWelcome && !isAdmin() && r.name === 'home') r.name = 'welcome';
-    if (!VIEWS[r.name]) r.name = 'home';
     state.route = r;
     const pill = isAdmin() && r.name !== 'admin' ? `<a class="admin-pill" href="#/admin">${icon('grid', 16)} ${t('a_admin')}</a>` : '';
     app.innerHTML = VIEWS[r.name](r) + (NAV.includes(r.name) ? navBar(r.name) : '') + sheetView() + pill;
@@ -1035,6 +1034,8 @@
 
   applyTheme();
   applyLang();
+  // Telegram opens the app with "#tgWebAppData=..." (its script has already read it), which is not one of our routes.
+  if (/^#tgWebApp/.test(location.hash)) history.replaceState(null, '', '#/');
   // The owner lands straight in the panel.
   if (isAdmin() && parse().name === 'home') history.replaceState(null, '', '#/admin');
   stack.push({ h: location.hash || '#/', y: 0 });
