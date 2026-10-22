@@ -14,7 +14,7 @@ Double-click `index.html`. For the phone view in Chrome, press F12 and then Ctrl
 | `admin.js` | The seller (admin) panel |
 | `app.js`, `styles.css`, `index.html` | The app itself. You don't touch these for a new client |
 
-**New client = edit `config.js` and `products.js`.** After any change, raise the `?v=8` number in `index.html` (to `?v=9` and so on) so Telegram doesn't show the old cached version.
+**New client = edit `config.js` and `products.js`.** After any change, raise the `?v=9` number in `index.html` (to `?v=10` and so on) so Telegram doesn't show the old cached version.
 
 ## Put it online (free, HTTPS — Telegram requires it)
 Easiest: go to https://app.netlify.com/drop and drag the `demo-store` folder in. You get a link like `https://something.netlify.app`.

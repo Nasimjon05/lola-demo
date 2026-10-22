@@ -29,7 +29,7 @@
     orders: load('orders', []),
     seenWelcome: false, // shown on every launch, so the demo always opens with it
     demoOrders: load('demoOrders', null),
-    adminDemo: load('adminDemo', false),
+    adminDemo: false, // demo seller mode lasts one launch, so the demo always reopens as a shopper
     promo: load('promo', null),
     checkout: Object.assign({
       name: tgUser ? [tgUser.first_name, tgUser.last_name].filter(Boolean).join(' ') : '',
@@ -50,7 +50,7 @@
     persist('lang', state.lang); persist('cart', state.cart); persist('fav', state.fav);
     persist('orders', state.orders);
     persist('promo', state.promo); persist('checkout', state.checkout);
-    persist('demoOrders', state.demoOrders); persist('adminDemo', state.adminDemo);
+    persist('demoOrders', state.demoOrders);
   }
   function isAdmin() { return ownerByTelegram || (SHOP.demoAdminSwitch && state.adminDemo); }
   function allOrders() { return state.orders.concat(state.demoOrders || []).sort((a, b) => b.ts - a.ts); }
